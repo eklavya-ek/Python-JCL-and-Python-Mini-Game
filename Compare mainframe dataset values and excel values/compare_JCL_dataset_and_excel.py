@@ -64,15 +64,13 @@ def excel_data():
     df_excel = pd.read_fwf(base_path + "data_text.txt", delim_whitespace = False, dtype = 'str', widths = [10, 15 ,20], skiprows = 1, header=None, name = ['Column1_header', 'Column2_header', 'Column3_header']) #loads out output text file as dataframe. In the width attribute, give the positions of each column by opening text file in notepad++. In column attributte, give the name for column heades for each column that is mentioned in widhts.
     return df_excel
     
-            
-    
 
-if __name__ == '__main__':
-    df_host = host_data()
-    df_excel = excel_data()
+def compare(host_df , excel_df):
     # in order to compare two data frames, both the data frames chould have similar column headers. Currently our dataframes hold all the data as rows and columns.
     # from the above two original dataframes, we can take out the specific similar columns that have to be compared.
     # for ex. column name: marks, percentage from dataframe 1st and marks, percentage from 2nd dataframe
+    df_host = host_df
+    df_excel = excel_df
     df_host_cols = df_host[['marks', 'percentage', 'average']].copy() #created new dataframe by copying 3 columns from the original dataframe
     df_excel_cols = df_excel[['marks', 'percentage', 'average']].copy() #selecting the same columns from the excel dataframe
     
@@ -89,6 +87,11 @@ if __name__ == '__main__':
     print("Total differences: ", difference.count()) #gives count of total different records
     print("Matching Records: ", df_match.head(5)) #prints matching records, only 5 records at a time
     print("Mismatch Records: ", df_diff.head(5)) #prints non macthing records, only 5 records at a time
+            
+    
+
+if __name__ == '__main__':
+    compare(host_data(), excel_data())
     
     
     
