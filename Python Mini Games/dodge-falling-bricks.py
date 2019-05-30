@@ -8,7 +8,7 @@ Created on Wed May 29 14:57:47 2019
 import pygame
 import sys
 import random
-import math
+import time
 #first initialize pygame
 pygame.init()
 
@@ -131,6 +131,7 @@ while not game_over:
     screen.blit(label, (width-200, height-40))
     if collision_check(enemy_list, player_pos):
         game_over = True
+        time.sleep(3)
         break
     draw_enemies(enemy_list)
     #draw player rectangle
